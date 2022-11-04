@@ -10,6 +10,8 @@
 
 
 extern "C" CAN_HandleTypeDef hcan;
+extern "C" TIM_HandleTypeDef htim2;
+extern "C" TIM_HandleTypeDef htim3;
 
 using namespace CRSLib::IntegerTypes;
 MPU9250 imu{&hspi1, GPIOB, GPIO_PIN_6};
@@ -42,6 +44,9 @@ extern "C" void main_cpp()
 
 	CRSLib::Can::RM0008::FilterManager::dynamic_initialize();
 	HAL_CAN_Start(&hcan);
+
+	HAL_TIM_Start(&htim2);
+	HAL_TIM_Start(&htim3);
 
 	while(true)
 	{
